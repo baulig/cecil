@@ -286,6 +286,13 @@ namespace Mono.Cecil {
 		internal MetadataImporter MetadataImporter {
 			get { return importer ?? (importer = new MetadataImporter (this)); }
 		}
+
+		public void SetMetadataImporter (MetadataImporter importer)
+		{
+			if (this.importer != null)
+				throw new InvalidOperationException ();
+			this.importer = importer;
+		}
 #endif
 
 		public IAssemblyResolver AssemblyResolver {

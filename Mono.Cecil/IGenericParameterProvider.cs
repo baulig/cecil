@@ -45,7 +45,7 @@ namespace Mono.Cecil {
 		Method
 	}
 
-	interface IGenericContext {
+	public interface IGenericContext {
 
 		bool IsDefinition { get; }
 		IGenericParameterProvider Type { get; }

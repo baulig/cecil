@@ -35,12 +35,12 @@ using Mono.Cecil.Metadata;
 
 namespace Mono.Cecil {
 
-	enum ImportGenericKind {
+	public enum ImportGenericKind {
 		Definition,
 		Open,
 	}
 
-	struct ImportGenericContext {
+	public struct ImportGenericContext {
 
 		Collection<IGenericParameterProvider> stack;
 
@@ -110,9 +110,9 @@ namespace Mono.Cecil {
 		}
 	}
 
-	class MetadataImporter {
+	public class MetadataImporter {
 
-		readonly ModuleDefinition module;
+		protected readonly ModuleDefinition module;
 
 		public MetadataImporter (ModuleDefinition module)
 		{
@@ -474,7 +474,7 @@ namespace Mono.Cecil {
 			throw new NotSupportedException ();
 		}
 
-		AssemblyNameReference ImportAssemblyName (AssemblyNameReference name)
+		protected virtual AssemblyNameReference ImportAssemblyName (AssemblyNameReference name)
 		{
 			AssemblyNameReference reference;
 			if (TryGetAssemblyNameReference (name, out reference))
