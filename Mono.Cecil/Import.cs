@@ -437,7 +437,7 @@ namespace Mono.Cecil {
 		}
 #endif
 
-		public TypeReference ImportType (TypeReference type, ImportGenericContext context)
+		public virtual TypeReference ImportType (TypeReference type, ImportGenericContext context)
 		{
 			if (type.IsTypeSpecification ())
 				return ImportTypeSpecification (type, context);

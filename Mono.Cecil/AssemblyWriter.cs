@@ -104,6 +104,7 @@ namespace Mono.Cecil {
 #endif
 			var metadata = new MetadataBuilder (module, fq_name,
 				symbol_writer_provider, symbol_writer);
+			metadata.custom_writer = parameters.CustomWriterDelegate;
 
 			BuildMetadata (module, metadata);
 
@@ -737,6 +738,8 @@ namespace Mono.Cecil {
 
 		readonly internal bool write_symbols;
 
+		internal ICustomWriterDelegate custom_writer;
+
 		public MetadataBuilder (ModuleDefinition module, string fq_name, ISymbolWriterProvider symbol_writer_provider, ISymbolWriter symbol_writer)
 		{
 			this.module = module;
@@ -1164,6 +1167,9 @@ namespace Mono.Cecil {
 
 		MetadataToken GetTypeRefToken (TypeReference type)
 		{
+			if (custom_writer != null)
+				type = custom_writer.RemapTypeRef (type);
+
 			var row = CreateTypeRefRow (type);
 
 			MetadataToken token;

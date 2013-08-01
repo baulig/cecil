@@ -157,6 +157,11 @@ namespace Mono.Cecil {
 		}
 	}
 
+	public interface ICustomWriterDelegate
+	{
+		TypeReference RemapTypeRef (TypeReference type);
+	}
+
 	public sealed class WriterParameters {
 
 		Stream symbol_stream;
@@ -185,6 +190,11 @@ namespace Mono.Cecil {
 			set { key_pair = value; }
 		}
 #endif
+		public ICustomWriterDelegate CustomWriterDelegate
+		{
+			get;
+			set;
+		}
 	}
 
 #endif
