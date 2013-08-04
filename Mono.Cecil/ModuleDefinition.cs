@@ -159,7 +159,7 @@ namespace Mono.Cecil {
 
 	public interface ICustomWriterDelegate
 	{
-		TypeReference RemapTypeRef (TypeReference type);
+		bool RemapTypeRef (ref TypeReference type, out MetadataToken token);
 	}
 
 	public sealed class WriterParameters {

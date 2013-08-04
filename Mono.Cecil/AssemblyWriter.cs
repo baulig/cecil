@@ -1167,12 +1167,14 @@ namespace Mono.Cecil {
 
 		MetadataToken GetTypeRefToken (TypeReference type)
 		{
-			if (custom_writer != null)
-				type = custom_writer.RemapTypeRef (type);
+			MetadataToken token;
+			if (custom_writer != null) {
+				if (custom_writer.RemapTypeRef (ref type, out token))
+					return token;
+			}
 
 			var row = CreateTypeRefRow (type);
 
-			MetadataToken token;
 			if (type_ref_map.TryGetValue (row, out token))
 				return token;
 
